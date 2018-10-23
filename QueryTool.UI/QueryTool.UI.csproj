@@ -59,8 +59,8 @@
     <Compile Include="IMainView.cs" />
     <Compile Include="INotifyUser.cs" />
     <Compile Include="NotificationHub.cs" />
-    <Compile Include="Pages\Configuration.xaml.cs">
-      <DependentUpon>Configuration.xaml</DependentUpon>
+    <Compile Include="Pages\ConfigurationPage.xaml.cs">
+      <DependentUpon>ConfigurationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QueryPadPage.xaml.cs">
       <DependentUpon>QueryPadPage.xaml</DependentUpon>
@@ -96,7 +96,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\Configuration.xaml">
+    <Page Include="Pages\ConfigurationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

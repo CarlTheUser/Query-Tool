@@ -28,7 +28,7 @@ namespace QueryTool.UI.Pages
 
         public override ViewModel.ViewModel GetViewModel()
         {
-            throw new NotImplementedException();
+            return VM;
         }
     }
 }

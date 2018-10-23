@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QueryTool.UI.ViewModel;
 
 namespace QueryTool.UI.Pages
 {
     /// <summary>
-    /// Interaction logic for Configuration.xaml
+    /// Interaction logic for ConfigurationPage.xaml
     /// </summary>
-    public partial class Configuration : Page
+    public partial class ConfigurationPage : BasePage
     {
-        public Configuration()
+        public ConfigurationPage()
         {
             InitializeComponent();
+        }
+
+        public override ViewModel.ViewModel GetViewModel()
+        {
+            return VM;
         }
     }
 }
