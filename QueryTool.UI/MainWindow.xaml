@@ -1,0 +1,126 @@
+﻿<Window x:Class="QueryTool.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QueryTool.UI"
+        xmlns:viewmodel="clr-namespace:QueryTool.UI.ViewModel"
+        xmlns:conv="clr-namespace:QueryTool.UI.Converter"
+        xmlns:p="clr-namespace:QueryTool.UI.Properties"
+        mc:Ignorable="d"
+        xmlns:w="clr-namespace:System.Windows"
+        Title="Query Tool Client" Height="600" Width="1024"
+        Style="{StaticResource MainWindow}"
+        Loaded="Window_Loaded"
+        Activated="Window_Activated">
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel x:Name="VM"/>
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:BoolToVisibilityConverter x:Key="boolToVisibility"/>
+
+        <Storyboard x:Key="sbShowNotification" >
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                             From="0" 
+                             To="1" 
+                             AccelerationRatio="1" 
+                             Duration="0:0:0.5"  />
+        </Storyboard>
+
+        <Storyboard x:Key="sbHideNotification" 
+                    Completed="HideNotification_Completed" >
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                             From="1" 
+                             To="0" 
+                             Duration="0:0:0.5"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              Width="160">
+            <StackPanel Orientation="Vertical">
+                <StackPanel.Resources>
+                    <Style TargetType="RadioButton" 
+                           BasedOn="{StaticResource FlatToggle}">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="BorderThickness" Value="4 0 0 0"/>
+                        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
+                        <Setter Property="Padding" Value="24 12"/>
+                    </Style>
+                </StackPanel.Resources>
+                <RadioButton GroupName="Pages" 
+                             Content="Query"
+                             IsChecked="True"/>
+                <RadioButton GroupName="Pages" 
+                             Content="Saved Queries"/>
+                <RadioButton GroupName="Pages" 
+                             Content="Configuration"/>
+                <RadioButton GroupName="Pages" 
+                             Content="Theme"/>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Column="1" Background="Transparent">
+            
+            <Frame Name="PageDisplay" 
+                   NavigationUIVisibility="Hidden"
+                   Content="{Binding CurrentPage}">
+
+            </Frame>
+            
+            
+            
+            <!--Notification Popup-->
+            
+            <Border x:Name="notificationHandle" 
+                    Panel.ZIndex="2" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"  
+                    Margin="20 20 20 50" 
+                    Opacity="0" 
+                    Background="White" 
+                    BorderThickness="1"
+                    MaxHeight="100"
+                    Grid.Row="1" >
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{Binding Source={x:Static p:Settings.Default}, Path=ThemeColor}"/>
+                </Border.BorderBrush>
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="4" 
+                                      BlurRadius="14" 
+                                      Opacity="0.3" 
+                                      Color="Black"/>
+                </Border.Effect>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="notificationHandleText" 
+                               FontSize="12" 
+                               Text="Notification here " 
+                               Padding="10 6" 
+                               TextWrapping="WrapWithOverflow" 
+                               Grid.Column="0"/>
+                    <Button x:Name="notificationCloseButton" 
+                            Grid.Column="1"
+                            VerticalAlignment="Center" 
+                            Height="13" 
+                            Margin="0 0 6 0"
+                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="notificationCloseButton_Click" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Image Source="{StaticResource CloseIcon}" Stretch="Uniform"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,72 @@
+﻿<local:BasePage x:Class="QueryTool.UI.Pages.QueryPadPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QueryTool.UI.Pages"
+      mc:Ignorable="d" 
+      xmlns:a="clr-namespace:QueryTool.UI.AttachedProperties"
+      xmlns:viewmodel="clr-namespace:QueryTool.UI.ViewModel"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="QueryPadPage">
+    <Page.DataContext>
+        <viewmodel:QueryPadViewModel x:Name="VM"/>
+    </Page.DataContext>
+    <Grid Background="{StaticResource DefaultBackground}">
+        <Grid.Resources>
+            <Style TargetType="DataGrid">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Margin" Value="8"/>
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" 
+                   Text="Run a query..."
+                   FontSize="{StaticResource FontSizeLarge}"/>
+
+
+        <!--Top textbox and buttons-->
+        <Grid Grid.Row="1">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource PlainButton}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="8"/>
+                    <Setter Property="Margin" Value="3"/>
+
+                </Style>
+            </Grid.Resources>
+            <TextBox Style="{StaticResource FlatTextBox}"
+                     Name="QueryInputField"
+                     a:ClearableText.EnableClearTextProperty="True"
+                     a:Hint.TextProperty="Query Here"
+                     Margin="6 0"
+                     Height="32"/>
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal">
+                <Button Content="Run"
+                        Command="{Binding RunQueryCommand}"
+                        CommandParameter="{Binding ElementName=QueryInputField, Path=Text}"/>
+                <Button Content="Save Query"
+                        Command="{Binding SaveQueryCommand}"
+                        CommandParameter="{Binding ElementName=QueryInputField, Path=Text}"/>
+            </StackPanel>
+        </Grid>
+
+        <DataGrid Grid.Row="2">
+            
+        </DataGrid>
+        
+    </Grid>
+</local:BasePage>

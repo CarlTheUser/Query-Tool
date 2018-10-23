@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryTool.UI", "QueryTool.UI\QueryTool.UI.csproj", "{E8CC5680-F934-40E3-AF90-7225236D19A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryTool.Data", "QueryTool.Data\QueryTool.Data.csproj", "{17F24307-708E-420C-ACA4-FECBB9835EED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8CC5680-F934-40E3-AF90-7225236D19A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8CC5680-F934-40E3-AF90-7225236D19A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8CC5680-F934-40E3-AF90-7225236D19A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8CC5680-F934-40E3-AF90-7225236D19A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F24307-708E-420C-ACA4-FECBB9835EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F24307-708E-420C-ACA4-FECBB9835EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F24307-708E-420C-ACA4-FECBB9835EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F24307-708E-420C-ACA4-FECBB9835EED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BCE746B-829F-45D6-B4B0-BD86C68E5339}
+	EndGlobalSection
+EndGlobal
