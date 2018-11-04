@@ -12,9 +12,9 @@ namespace QueryTool.UI.Navigation
 
         bool Navigate(NavigationItem navigationItem);
 
-        void NavigateBack();
+        //void NavigateBack();
 
-        void NavigateHome();
+        //void NavigateHome();
 
     }
 }

@@ -22,7 +22,7 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -47,15 +47,23 @@
 
                 </Style>
             </Grid.Resources>
-            <TextBox Style="{StaticResource FlatTextBox}"
+
+            <TextBox Grid.Column="0"
+                     Style="{StaticResource FlatTextBox}"
                      Name="QueryInputField"
+                     Text="{Binding CurrentQuery}"
                      a:ClearableText.EnableClearTextProperty="True"
                      a:Hint.TextProperty="Query Here"
-                     Margin="6 0"
-                     Height="32"/>
+                     Margin="6 0" 
+                     AcceptsReturn="True"
+                     VerticalAlignment="Center"/>
+
+
             <StackPanel Grid.Column="1"
-                        Orientation="Horizontal">
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
                 <Button Content="Run"
+                        IsDefault="True"
                         Command="{Binding RunQueryCommand}"
                         CommandParameter="{Binding ElementName=QueryInputField, Path=Text}"/>
                 <Button Content="Save Query"
@@ -64,7 +72,9 @@
             </StackPanel>
         </Grid>
 
-        <DataGrid Grid.Row="2">
+        <DataGrid Grid.Row="2"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding ResultSet}">
             
         </DataGrid>
         

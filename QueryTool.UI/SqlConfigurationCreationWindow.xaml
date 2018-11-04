@@ -1,0 +1,101 @@
+﻿<Window x:Class="QueryTool.UI.SqlConfigurationCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QueryTool.UI"
+        xmlns:vm="clr-namespace:QueryTool.UI.ViewModel"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:conv="clr-namespace:QueryTool.UI.Converter"
+        mc:Ignorable="d"
+        Style="{StaticResource MainWindow}"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        Title="New Sql Configuration" Width="525">
+    <Window.DataContext>
+        <vm:SqlConfigurationCreationViewModel x:Name="VM"/>
+    </Window.DataContext>
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical" Margin="{StaticResource MarginSmall}">
+            <StackPanel.Resources>
+                <GridLength x:Key="LabelWidth">125</GridLength>
+
+                <Style TargetType="Grid">
+                    <Setter Property="Margin"
+                            Value="0 24 0 0"/>
+                </Style>
+                
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment"
+                            Value="Center"/>
+                </Style>
+                <Style TargetType="TextBox"
+                       BasedOn="{StaticResource FlatTextBox}">
+                    <Setter Property="Margin" 
+                            Value="{StaticResource MarginExtraSmall}"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource LabelWidth}"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Configuration Name"/>
+                <TextBox Grid.Column="1"
+                         Text="{Binding SqlConfiguration.Name}"/>
+
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource LabelWidth}"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Connection String"/>
+                <TextBox Grid.Column="1"
+                         Text="{Binding SqlConfiguration.ConnectionString}"/>
+
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource LabelWidth}"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Provider"/>
+                <ComboBox Grid.Column="1"
+                          Name="ProviderSelectionInput"
+                          Style="{StaticResource ComboBoxFlatStyle}"
+                          Margin="{StaticResource MarginExtraSmall}"
+                          SelectedItem="{Binding SqlConfiguration.Provider}"/>
+
+            </Grid>
+
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0 24 0 0"
+                        FlowDirection="RightToLeft">
+                
+                <Button Content="Save"
+                        Style="{StaticResource ActionButton}"
+                        Padding="8 6"
+                        Foreground="{StaticResource LightText}"
+                        Click="Button_Click_1"/>
+                <Button Content="Cancel"
+                        Click="Button_Click"
+                        Style="{StaticResource AccentedPlainButton}"
+                        Margin="8 0"
+                        Padding="8 6"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -30,6 +30,8 @@ namespace QueryTool.Data.SQL
                         {
                             dt = new DataTable();
                             dt.Load(dr);
+
+                            //dt = dr.GetSchemaTable();
                         }
                     }
                     catch
@@ -68,6 +70,36 @@ namespace QueryTool.Data.SQL
                 finally
                 {
                     connection.Close();
+                }
+            }
+            return dt;
+        }
+
+        public DataTable GetSchema(string queryString)
+        {
+            DataTable dt = null;
+
+            using (DbConnection connection = sqlProvider.CreateConnection())
+            {
+                using (DbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = queryString;
+                    try
+                    {
+                        connection.Open();
+                        using (DbDataReader dr = command.ExecuteReader())
+                        {
+                            dt = dr.GetSchemaTable();
+                        }
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
                 }
             }
             return dt;

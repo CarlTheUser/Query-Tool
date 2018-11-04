@@ -55,9 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\PasswordMaskConverter.cs" />
+    <Compile Include="Converter\ValueEqualsConverter.cs" />
+    <Compile Include="Custom\QueryListItem.xaml.cs">
+      <DependentUpon>QueryListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IApplicationView.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="INotifyUser.cs" />
+    <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\PersistibleModel.cs" />
+    <Compile Include="Model\Query.cs" />
+    <Compile Include="Model\SqlConfiguration.cs" />
     <Compile Include="NotificationHub.cs" />
     <Compile Include="Pages\ConfigurationPage.xaml.cs">
       <DependentUpon>ConfigurationPage.xaml</DependentUpon>
@@ -65,12 +74,45 @@
     <Compile Include="Pages\QueryPadPage.xaml.cs">
       <DependentUpon>QueryPadPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SavedQueriesPage.xaml.cs">
+      <DependentUpon>SavedQueriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QueryConfiguration.cs" />
+    <Compile Include="SqlConfigurationCreationWindow.xaml.cs">
+      <DependentUpon>SqlConfigurationCreationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SqlConfigurationEditWindow.xaml.cs">
+      <DependentUpon>SqlConfigurationEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TempWindow.xaml.cs">
+      <DependentUpon>TempWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewComponent\BasicNotification\InputBoxNotification.cs" />
+    <Compile Include="ViewComponent\BasicNotification\InputBoxWindow.xaml.cs">
+      <DependentUpon>InputBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewComponent\IClosable.cs" />
+    <Compile Include="ViewComponent\Implementation\SqlConfigurationInputComponent.cs" />
+    <Compile Include="ViewComponent\INotification.cs" />
+    <Compile Include="ViewComponent\IInputComponent.cs" />
+    <Compile Include="ViewComponent\SqlConfigurationWindowInput.cs" />
+    <Compile Include="ViewLauncher\ISqlConfigurationEditViewLauncher.cs" />
+    <Compile Include="ViewLauncher\IViewLauncher.cs" />
+    <Compile Include="ViewLauncher\SqlConfigurationEditWindowLauncher.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NothingViewModel.cs" />
+    <Compile Include="ViewModel\QueryListItemViewModel.cs" />
     <Compile Include="ViewModel\QueryPadViewModel.cs" />
+    <Compile Include="ViewModel\SavedQueriesViewModel.cs" />
+    <Compile Include="ViewModel\SqlConfigurationCreationViewModel.cs" />
+    <Compile Include="ViewModel\SqlConfigurationEditViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="WindowBlur.cs" />
+    <Page Include="Custom\QueryListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +143,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\QueryPadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SavedQueriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SqlConfigurationCreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SqlConfigurationEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +205,14 @@
     <Page Include="Style\Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TempWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewComponent\BasicNotification\InputBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModels.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -216,6 +278,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\hamburger-menu-black-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QueryTool.Data\QueryTool.Data.csproj">
+      <Project>{17f24307-708e-420c-aca4-fecbb9835eed}</Project>
+      <Name>QueryTool.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\cancel-white-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\right-arrow-white-16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

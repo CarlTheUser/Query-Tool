@@ -13,14 +13,18 @@ namespace QueryTool.UI.ViewModel
 {
     public class MainWindowViewModel : ViewModel, IMainView, IUserNavigation
     {
-        
-        public ICommand NavigateCommand { get; private set; }
+
+        public static readonly int INITIALPAGE_PARAMETER = 1;
 
         public ICommand NavigateBackCommand { get; private set; }
 
         public ICommand NavigateHomeCommand { get; private set; }
 
-        public ICommand ToggleMenuCommand { get; private set; }
+        public ICommand NavigateQueryPadCommand { get; private set; }
+
+        public ICommand NavigateConfigurationCommand { get; private set; }
+
+        public ICommand NavigateSavedQueriesCommand { get; private set; }
 
         public event EventHandler<PrenavigationEventArgs> Prenavigate;
 
@@ -28,8 +32,18 @@ namespace QueryTool.UI.ViewModel
 
         private readonly Stack<NavigationItem> navigationStack = new Stack<NavigationItem>();
 
-        private ApplicationPage ApplicationPage { get; set; }
-        
+        private ApplicationPage _applicationPage = ApplicationPage.Nothing;
+
+        public ApplicationPage ApplicationPage
+        {
+            get => _applicationPage;
+            set
+            {
+                _applicationPage = value;
+                OnPropertyChanged("ApplicationPage");
+            }
+        }
+
         private Page currentPage = null;
 
         public Page CurrentPage
@@ -42,19 +56,37 @@ namespace QueryTool.UI.ViewModel
                 OnPropertyChanged("HasBackStack");
             }
         }
-        
+
         private bool CurrentPageInBackStack { get; set; }
 
         public bool HasBackStack => navigationStack.Count > 1;
-        
+
         private Func<ApplicationPage> HomePageRequestAction = () => ApplicationPage.Nothing;
+        
 
         public MainWindowViewModel()
         {
             NavigateBackCommand = new RelayCommand(NavigateBack, () => HasBackStack);
             NavigateHomeCommand = new RelayCommand(NavigateHome);
+            NavigateQueryPadCommand = new RelayCommand(NavigateToQueryPage);
+            NavigateConfigurationCommand = new RelayCommand(NavigateToConfigurationPage);
+            NavigateSavedQueriesCommand = new RelayCommand(NavigateToSavedQueriesPage);
 
             Navigate(new NavigationItem(ApplicationPage.QueryPad));
+        }
+
+        protected override void OnParameterSet(IDictionary<int, object> parameters)
+        {
+            if (parameters.ContainsKey(INITIALPAGE_PARAMETER))
+            {
+                object initialPageParameter = parameters[INITIALPAGE_PARAMETER];
+
+                if (initialPageParameter.GetType() == typeof(NavigationItem))
+                {
+                    Navigate((NavigationItem)initialPageParameter);
+                }
+            }
+            base.OnParameterSet(parameters);
         }
 
         #region Public Behaviors
@@ -64,7 +96,7 @@ namespace QueryTool.UI.ViewModel
             ApplicationPage navigationTarget = navigationItem.NavigationPage;
             if (ApplicationPage != navigationTarget)
             {
-                if(!CheckCancelNavigation(navigationTarget))
+                if (!CheckCancelNavigation(navigationTarget))
                 {
                     BasePage page = CreatePage(navigationTarget);
 
@@ -83,13 +115,13 @@ namespace QueryTool.UI.ViewModel
 
         public void NavigateBack()
         {
-            if(navigationStack.Count > 1)
+            if (navigationStack.Count > 1)
             {
 
                 NavigationItem Current = null;
-                if(CurrentPageInBackStack) Current = navigationStack.Pop();
+                if (CurrentPageInBackStack) Current = navigationStack.Pop();
                 NavigationItem Last = navigationStack.Pop();
-                if(!Navigate(Last))
+                if (!Navigate(Last))
                 {
                     navigationStack.Push(Last);
                     if (CurrentPageInBackStack) navigationStack.Push(Current);
@@ -107,10 +139,26 @@ namespace QueryTool.UI.ViewModel
 
         #region Private Methods
 
-        private void ToggleMenu()
-        {
+        //private void ToggleMenu()
+        //{
 
+        //}
+
+        private void NavigateToQueryPage()
+        {
+            Navigate(new NavigationItem(ApplicationPage.QueryPad));
         }
+
+        private void NavigateToConfigurationPage()
+        {
+            Navigate(new NavigationItem(ApplicationPage.Configuration));
+        }
+
+        private void NavigateToSavedQueriesPage()
+        {
+            Navigate(new NavigationItem(ApplicationPage.SavedQueries));
+        }
+
 
         private void ClearNavigationStack() => navigationStack.Clear();
 
@@ -137,17 +185,17 @@ namespace QueryTool.UI.ViewModel
 
         #region Event Handlers
 
-        
 
-        private void Instance_AccountLoggedOut(object sender, EventArgs e)
-        {
-            ClearNavigationStack();
-            //DisplayLogin();
-            NotificationHub.GetInstance().ShowMessage("See you again.");
-        }
+
+        //private void Instance_AccountLoggedOut(object sender, EventArgs e)
+        //{
+        //    ClearNavigationStack();
+        //    //DisplayLogin();
+        //    NotificationHub.GetInstance().ShowMessage("See you again.");
+        //}
 
         #endregion
 
-        
+
     }
 }

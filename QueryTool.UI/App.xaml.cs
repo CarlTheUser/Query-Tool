@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QueryTool.UI.ViewComponent.BasicNotification;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -24,6 +25,7 @@ namespace QueryTool.UI
         public new static App Current { get; private set; }
 
         public IMainView MainView { get; private set; }
+        public object MainViewViewModel { get; private set; }
 
         public App() : base()
         {
@@ -43,8 +45,11 @@ namespace QueryTool.UI
             base.OnStartup(e);
             MainWindow window = new MainWindow();
             MainView = (IMainView)window.DataContext;
+
             window.Show();
-            //new TempWindow().Show();
+
+            //new SqlConfigurationCreationWindow().Show();
+
 
         }
 

@@ -33,8 +33,7 @@ namespace QueryTool.UI
         {
             CurrentNotificationHandler = null;
         }
-
-
+        
         public void ShowMessage(string message)
         {
             try { CurrentNotificationHandler.ShowMessage(message); }
@@ -45,6 +44,11 @@ namespace QueryTool.UI
         {
             try { CurrentNotificationHandler.Prompt(message); }
             catch { MessageBox.Show(message); }
+        }
+
+        public void PopMessage(string message, string heading = null)
+        {
+            MessageBox.Show(message);
         }
     }
 }

@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace QueryTool.Data.Model
 {
-    class SqlConfiguration
+    internal class SqlConfiguration : BaseModel<int>
     {
+        
+        public override int Id { get; set; }
+
         public string Name { get; set; }
+
         public string ConnectionString { get; set; }
+
         public string ProviderType { get; set; }
+
     }
 }

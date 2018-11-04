@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QueryTool.Data.SQL.Implementation
 {
-    class MySqlProvider : ISqlProvider
+    internal class MySqlProvider : ISqlProvider
     {
         public string ConnectionString { get; set; }
 

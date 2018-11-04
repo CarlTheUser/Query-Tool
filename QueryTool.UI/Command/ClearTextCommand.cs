@@ -15,8 +15,11 @@ namespace QueryTool.UI.Command
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
         }
-
-        public bool CanExecute(object parameter) => true;
+        
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
 
         public void Execute(object parameter)
         {

@@ -36,5 +36,13 @@
     <BitmapImage 
             x:Key="AddressIconSmall"
             UriSource="pack://application:,,,/Images/Icons/home-black-16.png"/>
+    
+    <BitmapImage 
+            x:Key="CloseWhiteSmall"
+            UriSource="pack://application:,,,/Images/Icons/cancel-white-16.png"/>
+    
+    <BitmapImage 
+            x:Key="ArrowRightWhiteSmall"
+            UriSource="pack://application:,,,/Images/Icons/right-arrow-white-16.png"/>
 
 </ResourceDictionary>

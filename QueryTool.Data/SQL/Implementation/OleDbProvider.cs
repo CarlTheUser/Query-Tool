@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QueryTool.Data.SQL.Implementation
 {
-    class OleDbProvider : ISqlProvider
+    internal class OleDbProvider : ISqlProvider
     {
         public string ConnectionString { get; set; }
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QueryTool.Data.Client.Data;
 using QueryTool.UI.ViewModel;
 
 namespace QueryTool.UI.Pages
@@ -24,6 +25,7 @@ namespace QueryTool.UI.Pages
         public ConfigurationPage()
         {
             InitializeComponent();
+            //ConfigurationProviderInput.ItemsSource = Enum.GetValues(typeof(ProviderType)).Cast<ProviderType>();
         }
 
         public override ViewModel.ViewModel GetViewModel()

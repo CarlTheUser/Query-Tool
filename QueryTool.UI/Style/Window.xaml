@@ -19,8 +19,7 @@
                     CaptionHeight="0"
                     ResizeBorderThickness="10"
                     GlassFrameThickness="0"
-                    CornerRadius="0"
-                    />
+                    CornerRadius="0" />
             </Setter.Value>
         </Setter>
         <Setter

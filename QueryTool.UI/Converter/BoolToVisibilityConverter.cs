@@ -11,11 +11,15 @@ namespace QueryTool.UI.Converter
 {
     public class BoolToVisibilityConverter : IValueConverter
     {
+        public bool Inverse { get; set; }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if(value != null && value.GetType() == typeof(bool))
             {
-                return ((bool)value) ? Visibility.Visible : Visibility.Collapsed;
+                bool visible = (bool)value;
+                visible = Inverse ? !visible : visible;
+                return (visible) ? Visibility.Visible : Visibility.Collapsed;
             }
             return Binding.DoNothing;
         }

@@ -55,10 +55,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\ConfigurationOperation.cs" />
+    <Compile Include="Client\Data\ProviderType.cs" />
+    <Compile Include="Client\Data\QueryData.cs" />
+    <Compile Include="Client\QueryExecution.cs" />
+    <Compile Include="Client\QueryOperationcs.cs" />
+    <Compile Include="Client\Data\SqlConfigurationData.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Query.cs" />
     <Compile Include="Model\SqlConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\IModelPersistence.cs" />
+    <Compile Include="Provider\QueryModelPersistence.cs" />
+    <Compile Include="Provider\SqlConfigurationModelPersistence.cs" />
+    <Compile Include="Provider\XML\XMLQueryModelPersistence.cs" />
+    <Compile Include="Provider\XML\XMLSqlConfigurationModelPersistence.cs" />
     <Compile Include="SQL\Implementation\MsSqlProvider.cs" />
     <Compile Include="SQL\Implementation\MySqlProvider.cs" />
     <Compile Include="SQL\Implementation\OleDbProvider.cs" />
@@ -66,9 +78,7 @@
     <Compile Include="SQL\SqlCaller.cs" />
     <Compile Include="SQL\SqlProviderFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Provider\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace QueryTool.Data.SQL
 {
-    class SqlProviderFactory
+    internal class SqlProviderFactory
     {
-        static ISqlProvider CreateProvider<TProvider>(string connectionString) where TProvider : ISqlProvider, new()
+        public static ISqlProvider CreateProvider<TProvider>(string connectionString) where TProvider : ISqlProvider, new()
         {
             TProvider instance = new TProvider
             {

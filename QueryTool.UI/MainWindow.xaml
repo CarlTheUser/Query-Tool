@@ -7,8 +7,10 @@
         xmlns:viewmodel="clr-namespace:QueryTool.UI.ViewModel"
         xmlns:conv="clr-namespace:QueryTool.UI.Converter"
         xmlns:p="clr-namespace:QueryTool.UI.Properties"
+        xmlns:page="clr-namespace:QueryTool.UI.Pages"
         mc:Ignorable="d"
         xmlns:w="clr-namespace:System.Windows"
+        xmlns:navigation="clr-namespace:QueryTool.UI.Navigation"
         Title="Query Tool Client" Height="600" Width="1024"
         Style="{StaticResource MainWindow}"
         Loaded="Window_Loaded"
@@ -18,7 +20,6 @@
     </Window.DataContext>
     <Window.Resources>
         <conv:BoolToVisibilityConverter x:Key="boolToVisibility"/>
-
         <Storyboard x:Key="sbShowNotification" >
             <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                              From="0" 
@@ -42,7 +43,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0"
-              Width="160">
+              Width="224">
             <StackPanel Orientation="Vertical">
                 <StackPanel.Resources>
                     <Style TargetType="RadioButton" 
@@ -52,16 +53,28 @@
                         <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
                         <Setter Property="Padding" Value="24 12"/>
                     </Style>
+                    <conv:ValueEqualsConverter x:Key="ValueEqualsConverter"/>
                 </StackPanel.Resources>
                 <RadioButton GroupName="Pages" 
                              Content="Query"
-                             IsChecked="True"/>
+                             Command="{Binding NavigateQueryPadCommand}"    
+                             IsChecked="{Binding ApplicationPage, Mode=OneWay, Converter={StaticResource ValueEqualsConverter}, ConverterParameter={x:Static page:ApplicationPage.QueryPad}}"/>
                 <RadioButton GroupName="Pages" 
-                             Content="Saved Queries"/>
+                             Content="Saved Queries"
+                             Command="{Binding NavigateSavedQueriesCommand}"
+                             IsChecked="{Binding ApplicationPage, Mode=OneWay, Converter={StaticResource ValueEqualsConverter}, ConverterParameter={x:Static page:ApplicationPage.SavedQueries}}"/>
                 <RadioButton GroupName="Pages" 
-                             Content="Configuration"/>
+                             Content="Configuration"
+                             Command="{Binding NavigateConfigurationCommand}"
+                             IsChecked="{Binding ApplicationPage, Mode=OneWay, Converter={StaticResource ValueEqualsConverter}, ConverterParameter={x:Static page:ApplicationPage.Configuration}}"/>
                 <RadioButton GroupName="Pages" 
                              Content="Theme"/>
+
+                <!--<Button ...
+        Visibility="{Binding Path=CurrentAuthenticationLevel,
+            Converter={StaticResource AuthenticationToVisibility},
+            ConverterParameter={x:Static local:AuthenticationEnum.Administrator}}"/>-->
+
             </StackPanel>
         </Grid>
         

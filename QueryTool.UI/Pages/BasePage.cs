@@ -18,7 +18,9 @@ namespace QueryTool.UI.Pages
         {
             ApplicationPageRegistry = new Dictionary<ApplicationPage, Type>()
             {
-                { ApplicationPage.QueryPad, typeof(QueryPadPage) }
+                { ApplicationPage.QueryPad, typeof(QueryPadPage) },
+                { ApplicationPage.Configuration, typeof(ConfigurationPage) },
+                { ApplicationPage.SavedQueries, typeof(SavedQueriesPage) }
             };
         }
 

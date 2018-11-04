@@ -9,7 +9,7 @@
         <ResourceDictionary>
             <c:SecureStringHasTextBoolConverter x:Key="SecureStringConverter"/>
             <c:HasTextConverter x:Key="TextBoxHasTextConverter"/>
-            <command:ClearTextCommand x:Key="ClearTextCommand"/>
+            <command:ClearTextCommand x:Key="ClearTextCmd"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 
@@ -23,6 +23,7 @@
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Foreground" Value="{StaticResource DefaultTextBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderBrush" Value="{StaticResource ExtraDarkGrayBrush}"/>
         <Setter Property="a:Hint.TextProperty" Value=""/>
@@ -42,8 +43,14 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" >
                         <Grid>
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" Margin="0" x:Name="PART_ContentHost"/>
                             <TextBlock Name="HintText"
+                                       Grid.Column="0"
                                        Text="{Binding RelativeSource={RelativeSource TemplatedParent},
                                        Path=(a:Hint.TextProperty)}" 
                                        Visibility="Collapsed"
@@ -54,12 +61,14 @@
                                        FontStyle="{TemplateBinding FontStyle}"
                                        Padding="{Binding ElementName=Border, Path=Padding}"/>
                             <Button Name="ClearText"
+                                    Grid.Column="1"
                                     Style="{StaticResource Hoverless}" 
                                     Content="✕" 
                                     Foreground="{TemplateBinding Foreground}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Command="{StaticResource ClearTextCommand}"
+                                    Command="{StaticResource ClearTextCmd}"
+                                    IsHitTestVisible="True"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}}"
                                     Visibility="Collapsed"
                                     Margin="0 0 5 0"/>
@@ -91,7 +100,9 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="Foreground" Value="{StaticResource BlackBrush}"/>
+                            <Setter Property="Background" Value="White"/>
                         </Trigger>
+                        
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="BorderBrush">
                                 <Setter.Value>
